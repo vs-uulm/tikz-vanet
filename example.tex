@@ -1,0 +1,50 @@
+\documentclass{article}
+
+\usepackage{tikz}
+\usepackage{graphicx}
+
+\include{tikz-vanet-styles} % Define colors, replace this file for custom colors
+\include{tikz-vanet}        % VANET drawing commands
+
+% Make sure to include icons directory in path for commands to work:
+\graphicspath{{./}{icons/}}
+
+\begin{document}
+
+\begin{figure}
+	\pgfdeclarelayer{cars}
+	\pgfdeclarelayer{lights}
+	\pgfsetlayers{main,lights,cars}
+
+	\begin{tikzpicture}
+		\onramproad
+        \accident{left}{6}
+		
+        \commwave{(lane1-left) ++(3,0)}{2}
+        \commwave{(lane2-left) ++(4,0)}{2}
+		
+		\path (lane1-left) +(1,0) node {\carr};
+		
+		\tikzstyle{every pin}=[message]
+		
+		\begin{pgfonlayer}{cars}
+		\path (lane1-left) +(3,0) node[pin=below:\textbf{Warning:} emergency breaking!] (car1) {\carr};
+		\path (lane2-left) +(4,0) node[pin=above:\textbf{Warning:} emergency breaking!] (car2) {\carr};
+		\end{pgfonlayer}
+		
+		\begin{pgfonlayer}{lights}
+		% break lights
+		\foreach \i in {1,2} {%
+		\fill[red] (car\i.north west) +(4pt,-4pt) circle (3pt);
+		\fill[red] (car\i.south west) +(4pt,4pt) circle (3pt);
+		}
+		\end{pgfonlayer}
+		
+	\end{tikzpicture}
+	
+	\caption{An accident on a highway. Approaching vehicles can send emergency break warnings to avoid more accidents.}
+	\label{fig:example-safety}
+\end{figure}
+
+
+\end{document}
