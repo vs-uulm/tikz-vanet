@@ -23,13 +23,13 @@
         \commwave{(lane1-left) ++(3,0)}{2}
         \commwave{(lane2-left) ++(4,0)}{2}
 		
-		\path (lane1-left) +(1,0) node {\carr};
+		\path (lane1-left) +(1,0) node[Car] {};
 		
 		\tikzstyle{every pin}=[message]
 		
 		\begin{pgfonlayer}{cars}
-		\path (lane1-left) +(3,0) node[pin=below:\textbf{Warning:} emergency breaking!] (car1) {\carr};
-		\path (lane2-left) +(4,0) node[pin=above:\textbf{Warning:} emergency breaking!] (car2) {\carr};
+		\path (lane1-left) +(3,0) node[Car,pin=below:\textbf{Warning:} emergency breaking!] (car1) {};
+		\path (lane2-left) +(4,0) node[Car,pin=above:\textbf{Warning:} emergency breaking!] (car2) {};
 		\end{pgfonlayer}
 		
 		\begin{pgfonlayer}{lights}
