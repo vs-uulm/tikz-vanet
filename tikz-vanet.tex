@@ -11,13 +11,6 @@
 \tikzstyle{lane-right}=[start chain=going right,node distance=1ex]
 \tikzstyle{lane-left}=[start chain=going left,node distance=1ex]
 
-% \newcommand\carangle[1]{\includegraphics[height=2ex,angle=#1]{car}}
-% \newcommand\carr{\carangle{0}}
-% \newcommand\carl{\carangle{180}}
-
-% \newcommand\rsu{\includegraphics[height=6ex]{rsu}}
-\newcommand\server{\includegraphics[height=6ex]{server}}
-
 \newcommand\basicroad{%
 % coordinates
 \foreach \pos/\coord in {top/3ex, center/0, bottom/-3ex}{
@@ -144,3 +137,19 @@
 	c1.587,0.962,2.932,2.311,3.889,3.9c3.263,5.425,1.505,12.492-3.917,15.753C7.753,1.036,7.664,1.059,7.576,1.059z";
 },minimum width=2.2em,minimum height=3em}}
 \tikzset{RsuFill/.style={fill=black}}
+
+
+% Server
+
+\tikzset{Server/.style={path picture={
+\pgftransformscale{3em/100cm}
+\pgftransformyscale{-1}
+\fill[ServerFill] (-34.646,-26.568) -- (-34.648,36.998) -- (-5.069,42.52) -- (-5.069,-22.815) -- cycle;
+\fill[white] (-18.734,37.15) -- (-21.861,36.579) -- (-21.861,7.092) -- (-18.734,7.43) -- cycle;
+\fill[white] (-9.257,5.562) -- (-30.484,2.862) -- (-30.484,-3.595) -- (-9.257,-0.895) -- cycle;
+\fill[white] (-9.257,-3.595) -- (-30.484,-6.296) -- (-30.484,-12.754) -- (-9.257,-10.053) -- cycle;
+\fill[white] (-9.257,-12.755) -- (-30.484,-15.456) -- (-30.484,-21.914) -- (-9.257,-19.212) -- cycle;
+\fill[ServerFill] (-4.187,-24.749) -- (32.57,-39.392) -- (7.907,-42.52) -- (-32.506,-28.34) -- cycle;
+\fill[ServerFill] (-3.039,-23.021) -- (-3.039,42.166) -- (34.648,21.965) -- (34.648,-38.036) -- cycle;
+},minimum width=3em,minimum height=3em}}
+\tikzset{ServerFill/.style={fill=black}}
