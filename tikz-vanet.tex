@@ -5,14 +5,15 @@
 	decorations,
 	scopes,
 	arrows,
+	svg.path,
 }
 
 \tikzstyle{lane-right}=[start chain=going right,node distance=1ex]
 \tikzstyle{lane-left}=[start chain=going left,node distance=1ex]
 
-\newcommand\carangle[1]{\includegraphics[height=2ex,angle=#1]{car}}
-\newcommand\carr{\carangle{0}}
-\newcommand\carl{\carangle{180}}
+% \newcommand\carangle[1]{\includegraphics[height=2ex,angle=#1]{car}}
+% \newcommand\carr{\carangle{0}}
+% \newcommand\carl{\carangle{180}}
 
 \newcommand\rsu{\includegraphics[height=6ex]{rsu}}
 \newcommand\server{\includegraphics[height=6ex]{server}}
@@ -65,20 +66,34 @@
 
 \newcommand\accident[2]{%
 % accident
-
 \path (lane1-#1) +(#2,0) coordinate (p1);
 \path (lane2-#1) +(#2,0) coordinate (p2);
 
-\path (p1) edge node[right,accident-star,star,minimum size=4ex] {} (p2);
-\node[rotate=30] at (p1) {\carr};
-\node[rotate=-50] at (p2) {\carr};
+\path (p1) edge node[right,accident-star,minimum size=4ex] {} (p2);
+\node[Car,rotate=30] at (p1) {};
+\node[Car,rotate=-50] at (p2) {};
 }
 
 \newcommand\trafficjam[2]{% begin point (right), #cars
-\begin{scope}[lane-left,node distance=.2ex]
-	\path #1 node[on chain] {\carr};
+\begin{scope}[lane-left,node distance=1.5ex]
+	\path #1 node[Car,on chain] {};
 	\foreach \i in {2,...,#2}{
-	\node[on chain] {\carr};
+	\node[Car,on chain] {};
 	}
 \end{scope}
 }
+
+
+% Car
+\tikzset{Car/.style={,path picture={
+\pgftransformscale{1em/10mm}
+\fill[CarFill] svg "M28.21-13.605c9.562,3.446,9.648,23.671,0.155,27.315 c-4.363,0.507-11.834,0.663-14.102-0.052l-15.559,0.098c-0.361,0.54-2.344,0.587-2.49-0.046l-9.12-0.052 c-2.42,0.596-9.124,0.491-13.695,0.354c-0.868-0.069-2.466-0.383-3.055-0.86c-0.586-0.088-2.902-0.613-3.526-2.013 c-2.881-3.816-3.105-17.391-0.049-22.328c0.849-1.417,2.686-1.826,3.369-1.86c1.172-0.46,2.07-0.8,2.747-0.914 c4.707-0.249,12.097-0.404,14.099,0.304h9.073c0.314-0.542,2.336-0.684,2.805-0.049l15.296,0.103 C16.197-14.515,25.906-14.046,28.21-13.605z";%
+\fill[CarWindow] svg "M-24.197,9.442c-0.964,0.555-2.364,1.198-2.94,1.826c7.256,0.867,22.892,1.016,38.82,1.092 c-1.101-0.841-5.213-1.443-8.749-2.128C-0.618,9.9-14.507,9.656-24.197,9.442z";%
+\fill[CarWindow] svg "M33.182,7.616l-1.928,0.117c-0.877,1.522-1.91,4.131-4.51,5.058 c0.353,0.272,0.898,0.205,1.379,0.233C31.92,11.97,32.73,8.522,33.182,7.616z";%
+\fill[CarWindow] svg "M-31.825-9.373c-2.358,4.111-2.324,14.41,0.069,18.753l4.252-0.791 c-2.718,0.159-2.64-17.187,0.057-17.171L-31.825-9.373z";%
+\fill[CarWindow] svg "M14.187-11.443c-2.099,0.058-6.936,1.246-10.511,1.89C5.151-6.242,4.517,7.381,3.746,9.752 c3.689,0.599,8.887,1.858,10.498,1.517C18.698,9.763,18.805-9.979,14.187-11.443z";%
+\fill[CarWindow] svg "M11.803-12.355c-15.93,0.087-31.488,0.225-38.756,1.103c0.581,0.619,1.916,1.206,2.886,1.758 c9.685-0.21,23.573-0.4,27.118-0.732C6.597-10.911,10.71-11.511,11.803-12.355z";%
+\fill[CarWindow] svg "M27.243-13.147c-0.235,0.029-0.453,0.103-0.626,0.249c2.599,0.919,3.635,3.526,4.503,5.049 l1.934,0.127c-0.438-0.917-1.317-4.36-5.118-5.424C27.691-13.128,27.474-13.162,27.243-13.147z";%
+},minimum width=2.5em,minimum height=1em}}
+\tikzset{CarFill/.style={fill=black}}
+\tikzset{CarWindow/.style={fill=white}}
