@@ -48,6 +48,8 @@
 \draw[road-draw,dashed] (ramp-start) -- (ramp-end);
 }
 
+\tikzset{message/.style={->,shorten >=2pt,shorten <=2pt,line width=1pt}}
+
 \newcommand\commwave[2]{%
 \path[wave-fill] #1 circle (#2);
 \path[wave-draw] #1 circle (#2);
@@ -67,11 +69,11 @@
 \node[Car,rotate=-50] at (p2) {};
 }
 
-\newcommand\trafficjam[2]{% begin point (right), #cars
+\newcommand\trafficjam[3][jam]{% begin point (right), #cars
 \begin{scope}[lane-left,node distance=1.5ex]
-	\path #1 node[Car,on chain] {};
-	\foreach \i in {2,...,#2}{
-	\node[Car,on chain] {};
+	\path #2 node[Car,on chain] (#1-1) {};
+	\foreach \i in {2,...,#3}{
+	\node[Car,on chain] (#1-\i) {};
 	}
 \end{scope}
 }
